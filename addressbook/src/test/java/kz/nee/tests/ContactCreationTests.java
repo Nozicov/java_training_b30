@@ -7,10 +7,10 @@ public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
-    app.gotoContactCreation();
-    app.fillContactCreation(new ContactData("Yevgeniy", "Nozikov", "Almaty", "nee@nee.kz", "+77075555555"));
-    app.submitContactCreation();
-    app.returnToHomePage();
+    app.getNavigationHelper().gotoContactCreation();
+    app.getContactHelper().fillContactCreation(new ContactData("Yevgeniy", "Nozikov", "Almaty", "nee@nee.kz", "+77075555555"));
+    app.getContactHelper().submitContactCreation();
+    app.getNavigationHelper().returnToHomePage();
   }
 
 }
