@@ -1,4 +1,4 @@
-package kz.nee;
+package kz.nee.model;
 
 public class GroupData {
   private final String name;

@@ -2,12 +2,46 @@
 <Diagram>
   <ID>JAVA</ID>
   <OriginalElement />
-  <nodes />
+  <nodes>
+    <node x="202.0" y="258.0">kz.nee.tests.ContactCreationTests</node>
+    <node x="104.5" y="129.0">kz.nee.tests.TestBase</node>
+    <node x="100.5" y="0.0">kz.nee.appmanager.ApplicationManager</node>
+    <node x="0.0" y="258.0">kz.nee.tests.GroupCreationTests</node>
+  </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="0.0" y="0.0" />
+  <edges>
+    <edge source="kz.nee.tests.TestBase" target="kz.nee.appmanager.ApplicationManager" relationship="CREATE">
+      <point x="45.0" y="-39.5" />
+      <point x="239.5" y="104.0" />
+      <point x="241.5" y="104.0" />
+      <point x="47.0" y="39.5" />
+    </edge>
+    <edge source="kz.nee.tests.GroupCreationTests" target="kz.nee.tests.TestBase" relationship="GENERALIZATION">
+      <point x="0.0" y="-28.0" />
+      <point x="91.0" y="233.0" />
+      <point x="194.5" y="233.0" />
+      <point x="0.0" y="39.5" />
+    </edge>
+    <edge source="kz.nee.tests.TestBase" target="kz.nee.appmanager.ApplicationManager" relationship="TO_ONE">
+      <point x="-45.0" y="-39.5" />
+      <point x="149.5" y="104.0" />
+      <point x="147.5" y="104.0" />
+      <point x="-47.0" y="39.5" />
+    </edge>
+    <edge source="kz.nee.tests.ContactCreationTests" target="kz.nee.tests.TestBase" relationship="GENERALIZATION">
+      <point x="0.0" y="-28.0" />
+      <point x="298.0" y="233.0" />
+      <point x="194.5" y="233.0" />
+      <point x="0.0" y="39.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="320.5" y="294.5" />
   <SelectedNodes />
-  <Categories />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
 </Diagram>
 

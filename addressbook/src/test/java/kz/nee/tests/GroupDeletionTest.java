@@ -1,4 +1,4 @@
-package kz.nee;
+package kz.nee.tests;
 
 import org.testng.annotations.Test;
 
@@ -6,10 +6,10 @@ public class GroupDeletionTest extends TestBase {
 
   @Test
   public void testGroupDeletion() {
-    gotoGroupPage();
-    selectGroup();
-    deleteSelectedGrops();
-    gotoGroupPage();
+    app.gotoGroupPage();
+    app.selectGroup();
+    app.deleteSelectedGrops();
+    app.gotoGroupPage();
   }
 
 }
