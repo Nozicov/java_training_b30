@@ -4,7 +4,7 @@ import kz.nee.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends BaseHelper {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
