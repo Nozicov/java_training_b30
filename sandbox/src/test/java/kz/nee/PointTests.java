@@ -30,4 +30,13 @@ public class PointTests {
     Assert.assertEquals(10, p1.distance(p2));
   }
 
+  @Test
+  public void testFormula(){
+    int x1 = 10, y1 = 5, x2 = 8, y2 = 6;
+    double xx = (x2 - x1) * (x2 - x1);
+    double yy = (y2 - y1) * (y2 - y1);
+    double l =  Math.sqrt(xx + yy);
+    Assert.assertEquals(l, new Point(x1, y1).distance(new Point(x2, y2)));
+  }
+
 }
