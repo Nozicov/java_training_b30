@@ -47,4 +47,13 @@ public class ContactHelper extends BaseHelper {
   public void submitContactModification() {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
+
+  public void creatContact(ContactData contact) {
+    fillContactForm(contact, true);
+    submitContactCreation();
+  }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.xpath("//img[@title='Details']"));
+  }
 }
