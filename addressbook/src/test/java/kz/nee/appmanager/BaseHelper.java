@@ -5,7 +5,7 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 
 public class BaseHelper {
-  protected WebDriver wd;
+  WebDriver wd;
 
   public BaseHelper(WebDriver wd) {
     this.wd = wd;
