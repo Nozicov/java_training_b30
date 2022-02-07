@@ -32,7 +32,7 @@ public class GroupHelper extends BaseHelper {
     click(By.name("delete"));
   }
 
-  public void selectGroup() {
+  public void selectedGroup() {
     click(By.name("selected[]"));
   }
 
