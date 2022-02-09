@@ -2,8 +2,8 @@ package kz.nee.appmanager;
 
 import kz.nee.model.ContactData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class ContactHelper extends BaseHelper {
@@ -22,11 +22,18 @@ public class ContactHelper extends BaseHelper {
     type(By.name("address"), contactData.getAddress());
     type(By.name("email"), contactData.getEmail());
     type(By.name("mobile"), contactData.getMobile());
-    
-    if(creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    }
-    else{
+
+    if (creation) {
+      try {
+        selectList(By.name("new_group"), contactData.getGroup());
+      } catch (NoSuchElementException ex) {
+        try {
+          selectList(By.name("new_group"), "[none]");
+        } catch (NoSuchElementException e) {
+          Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+      }
+    } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
@@ -56,4 +63,9 @@ public class ContactHelper extends BaseHelper {
   public boolean isThereAContact() {
     return isElementPresent(By.xpath("//img[@title='Details']"));
   }
+
+  public boolean findGroupInContact(String name) {
+    return selectList(By.name("new_group"), name);
+  }
+
 }
