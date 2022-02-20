@@ -66,10 +66,10 @@ public class GroupHelper extends BaseHelper {
 
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<GroupData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    List<WebElement> elements = wd.findElements(By.xpath("//span[@class=\"group\"]"));
     for (WebElement element: elements){
       String name = element.getText();
-      GroupData group = new GroupData("name", null, null);
+      GroupData group = new GroupData(name, null, null);
       groups.add(group);
     }
     return groups;
