@@ -4,6 +4,7 @@ import kz.nee.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
@@ -14,10 +15,21 @@ public class GroupCreationTests extends TestBase {
 
     List<GroupData> before = app.getGroupHelper().getGroupList();
 
-    app.getGroupHelper().creatGroup(new GroupData("Group name", "Group header", "Group footer"));
+    GroupData group = new GroupData("Group name", "Group header", "Group footer");
+    app.getGroupHelper().creatGroup(group);
 
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1, "Количество групп не увеличилось!");
+
+    int max = 0;
+    for (GroupData g: after){
+      if (g.getId() > max){
+        max = g.getId();
+      }
+    }
+    group.setId(max);
+    before.add(group);
+    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after), "Сравнение множества групп прошло не успешно!");
   }
 
 }
