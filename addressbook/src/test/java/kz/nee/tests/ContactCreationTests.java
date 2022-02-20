@@ -5,6 +5,7 @@ import kz.nee.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -33,12 +34,9 @@ public class ContactCreationTests extends TestBase {
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1, "Количество контактов не увеличилось!");
 
-    int max = 0;
-    for (ContactData g: after){
-      if (g.getId() > max){
-        max = g.getId();
-      }
-    }
+
+
+    int max = after.stream().max((Comparator.comparingInt(ContactData::getId))).get().getId();
     contact.setId(max);
     before.add(contact);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after), "Сравнение множества групп прошло не успешно!");
