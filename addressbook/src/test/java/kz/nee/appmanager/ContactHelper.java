@@ -68,4 +68,7 @@ public class ContactHelper extends BaseHelper {
     return selectList(By.name("new_group"), name);
   }
 
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
