@@ -4,6 +4,8 @@ import kz.nee.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ContactModificationTests extends TestBase{
 
   @Test
@@ -14,14 +16,14 @@ public class ContactModificationTests extends TestBase{
       app.getNavigationHelper().returnToHomePage();
     }
 
-    int before = app.getContactHelper().getContactCount();
+    List<ContactData> before = app.getContactHelper().getContactList();
 
-    app.getContactHelper().selectedContactModification(before - 1);
+    app.getContactHelper().selectedContactModification(before.size() - 1);
     app.getContactHelper().fillContactForm(new ContactData("Yevgeniy - up", "Nozikov - up", "Almaty - up", "nee@nee-up.kz", "+77777777777", null), false);
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().returnToHomePage();
 
-    int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, before, "Изменилось количество контактов!");
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size(), "Изменилось количество контактов!");
   }
 }

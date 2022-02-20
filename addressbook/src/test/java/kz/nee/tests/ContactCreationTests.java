@@ -5,12 +5,14 @@ import kz.nee.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
 
-    int before = app.getContactHelper().getContactCount();
+    List<ContactData> before = app.getContactHelper().getContactList();
 
     app.getNavigationHelper().gotoContactCreation();
 
@@ -26,8 +28,8 @@ public class ContactCreationTests extends TestBase {
     app.getContactHelper().submitContactCreation();
     app.getNavigationHelper().returnToHomePage();
 
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before + 1, "Количество контактов не увеличилось!");
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() + 1, "Количество контактов не увеличилось!");
   }
 
 }

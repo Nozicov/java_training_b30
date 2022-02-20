@@ -4,6 +4,8 @@ import kz.nee.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ContactDeletionTests extends TestBase{
 
   @Test
@@ -15,13 +17,13 @@ public class ContactDeletionTests extends TestBase{
       app.getNavigationHelper().returnToHomePage();
     }
 
-    int before = app.getContactHelper().getContactCount();
+    List<ContactData> before = app.getContactHelper().getContactList();
 
-    app.getContactHelper().selectContact(before - 1);
+    app.getContactHelper().selectContact(before.size() - 1);
     app.getContactHelper().deleteSelectedContacts();
     app.getNavigationHelper().gotoHomePage();
 
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1, "Количество контактов не уменьшилось!");
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1, "Количество контактов не уменьшилось!");
   }
 }

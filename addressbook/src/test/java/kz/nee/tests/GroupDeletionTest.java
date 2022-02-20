@@ -4,6 +4,8 @@ import kz.nee.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class GroupDeletionTest extends TestBase {
 
   @Test
@@ -13,14 +15,14 @@ public class GroupDeletionTest extends TestBase {
       app.getGroupHelper().creatGroup(new GroupData("Group name", "Group header", "Group footer"));
     }
 
-    int before = app.getGroupHelper().getGroupCount();
+    List<GroupData> before = app.getGroupHelper().getGroupList();
 
-    app.getGroupHelper().selectedGroup(before - 1);
+    app.getGroupHelper().selectedGroup(before.size() - 1);
     app.getGroupHelper().deleteSelectedGrops();
     app.getNavigationHelper().gotoGroupPage();
 
-    int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after, before - 1, "Количество групп не уменьшилось!");
+    List<GroupData> after = app.getGroupHelper().getGroupList();
+    Assert.assertEquals(after.size(), before.size() - 1, "Количество групп не уменьшилось!");
   }
 
 }
