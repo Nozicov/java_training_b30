@@ -38,8 +38,9 @@ public class ContactHelper extends BaseHelper {
     }
   }
 
-  public void selectContact() {
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+    //click(By.name("selected[]"));
   }
 
   public void deleteSelectedContacts() {
@@ -47,8 +48,9 @@ public class ContactHelper extends BaseHelper {
     wd.switchTo().alert().accept();
   }
 
-  public void selectedContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void selectedContactModification(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    //click(By.xpath("//img[@alt='Edit']"));
   }
 
   public void submitContactModification() {
