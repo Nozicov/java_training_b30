@@ -4,7 +4,7 @@ import kz.nee.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactModificationTests extends TestBase{
@@ -30,6 +30,11 @@ public class ContactModificationTests extends TestBase{
 
     before.remove(before.size() - 1);
     before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after), "Сравнение множества контактов прошло не успешно!");
+
+    Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after, "Сравнение отсортированных списков контактов прошло не успешно!");
   }
+
 }

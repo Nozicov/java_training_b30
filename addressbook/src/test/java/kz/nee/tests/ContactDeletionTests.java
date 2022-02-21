@@ -4,6 +4,7 @@ import kz.nee.model.ContactData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ContactDeletionTests extends TestBase{
@@ -27,6 +28,10 @@ public class ContactDeletionTests extends TestBase{
     Assert.assertEquals(after.size(), before.size() - 1, "Количество контактов не уменьшилось!");
 
     before.remove(before.size() - 1);
-    Assert.assertEquals(before, after);
+    Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after, "Сравнение отсортированных списков контактов прошло не успешно!");
   }
+
 }
