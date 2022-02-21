@@ -13,6 +13,8 @@ public class ContactCreationTests extends TestBase {
   @Test
   public void testContactCreation() throws Exception {
 
+    app.getNavigationHelper().gotoHomePage();
+
     List<ContactData> before = app.getContactHelper().getContactList();
 
     app.getNavigationHelper().gotoContactCreation();
