@@ -16,6 +16,10 @@ public class ContactHelper extends BaseHelper {
     super(wd);
   }
 
+  public void returnToHomePage() {
+    click(By.linkText("home page"));
+  }
+
   public void submitContactCreation() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
@@ -61,9 +65,24 @@ public class ContactHelper extends BaseHelper {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
-  public void creatContact(ContactData contact) {
+  public void createContact(ContactData contact) {
+    gotoContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
+    returnToHomePage();
+  }
+
+  public void modifyContact(int index, ContactData contact) {
+    selectedContactModification(index);
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void deleteGroup(int index) {
+    selectContact(index);
+    deleteSelectedContacts();
+    returnHomePage();
   }
 
   public boolean isThereAContact() {
@@ -72,6 +91,17 @@ public class ContactHelper extends BaseHelper {
 
   public boolean findGroupInContact(String name) {
     return selectList(By.name("new_group"), name);
+  }
+
+  public void gotoContactCreation() {
+    click(By.linkText("add new"));
+  }
+
+  public void returnHomePage() {
+    if (isElementPresent(By.id("maintable"))){
+      return;
+    }
+    click(By.linkText("home"));
   }
 
   public int getContactCount() {
@@ -89,10 +119,6 @@ public class ContactHelper extends BaseHelper {
       String address = cells.get(3).getText();
       String email = cells.get(4).findElement(By.tagName("a")).getText();
       String mobile = cells.get(5).getText();
-//      String id = element.findElement(By.tagName("input")).getAttribute("id");
-//      String lastname = element.findElement(By.xpath("//td[2]")).getText();
-//      String firstname = element.findElement(By.xpath("//td[3]")).getText();
-//      String address = element.findElement(By.xpath("//td[4]")).getText();
       ContactData contact = new ContactData(id, firstname, lastname, address, email, mobile, null);
       contacts.add(contact);
     }

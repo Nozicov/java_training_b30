@@ -18,6 +18,15 @@ public class GroupHelper extends BaseHelper {
     click(By.linkText("group page"));
   }
 
+  public void gotoGroupPage() {
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Groups")
+            && isElementPresent(By.name("new"))){
+      return;
+    }
+    click(By.linkText("groups"));
+  }
+
   public void submitGroupCreation() {
     click(By.name("submit"));
   }
@@ -49,11 +58,26 @@ public class GroupHelper extends BaseHelper {
     click(By.name("update"));
   }
 
-  public void creatGroup(GroupData group) {
+  public void createGroup(GroupData group) {
+    gotoGroupPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnToGroupPage();
+  }
+
+  public void modifyGroup(int index, GroupData group) {
+    selectedGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
+  }
+
+  public void deleteGroup(int index) {
+    selectedGroup(index);
+    deleteSelectedGrops();
+    gotoGroupPage();
   }
 
   public boolean isThereAGroup() {
@@ -75,4 +99,5 @@ public class GroupHelper extends BaseHelper {
     }
     return groups;
   }
+
 }
