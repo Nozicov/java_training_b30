@@ -14,7 +14,14 @@ public class ContactModificationTests extends TestBase{
   public void ensurePreconditions(){
     if (app.contact().list().size() == 0){
       app.goTo().contactCreation();
-      app.contact().create(new ContactData("Yevgeniy", "Nozikov", "Almaty", "nee@nee.kz", "+77075555555", "Group name"));
+      app.contact().create(new ContactData()
+              .withFirstname("Yevgeniy")
+              .withLastname("Nozikov")
+              .withAddress("Almaty")
+              .withEmail("nee@nee.kz")
+              .withMobile("+77075555555")
+              .withGroup("Group name")
+      );
       app.contact().returnToHomePage();
     }
   }
@@ -24,7 +31,14 @@ public class ContactModificationTests extends TestBase{
 
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(), "Yevgeniy - up", "Nozikov - up", "Almaty - up", "nee@nee-up.kz", "+77777777777", null);
+
+    ContactData contact = new ContactData()
+            .withId(before.get(index).getId())
+            .withFirstname("Yevgeniy - up")
+            .withLastname("Nozikov - up")
+            .withAddress("Almaty - up")
+            .withEmail("nee@nee-up.kz")
+            .withMobile("+77777777777");
 
     app.contact().modify(index, contact);
 

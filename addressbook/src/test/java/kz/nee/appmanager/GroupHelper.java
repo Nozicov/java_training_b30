@@ -94,7 +94,9 @@ public class GroupHelper extends BaseHelper {
     for (WebElement element: elements){
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(id, name, null, null);
+      GroupData group = new GroupData()
+              .withId(id)
+              .withName(name);
       groups.add(group);
     }
     return groups;

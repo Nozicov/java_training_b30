@@ -14,7 +14,10 @@ public class ContactCreationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions(){
     app.goTo().contactCreation();
-    GroupData groupData = new GroupData("Group name", "Group header", "Group footer");
+    GroupData groupData = new GroupData()
+            .withName("Group name")
+            .withHeader("Group header")
+            .withFooter("Group footer");
     if (!app.contact().findGroup(groupData.getName())) {
       app.group().create(groupData);
     }
@@ -27,13 +30,18 @@ public class ContactCreationTests extends TestBase {
 
     List<ContactData> before = app.contact().list();
 
-    ContactData contact = new ContactData("Yevgeniy", "Nozikov", "Almaty", "nee@nee.kz", "+77075555555", "Group name");
-    int index = before.size() + 1;
+    ContactData contact = new ContactData()
+            .withFirstname("Yevgeniy")
+            .withLastname("Nozikov")
+            .withAddress("Almaty")
+            .withEmail("nee@nee.kz")
+            .withMobile("+77075555555")
+            .withGroup("Group name");
 
     app.contact().create(contact);
 
     List<ContactData> after = app.contact().list();
-    Assert.assertEquals(after.size(), index, "Количество контактов не увеличилось!");
+    Assert.assertEquals(after.size(), before.size() + 1, "Количество контактов не увеличилось!");
 
     before.add(contact);
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);

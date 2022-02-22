@@ -119,7 +119,13 @@ public class ContactHelper extends BaseHelper {
       String address = cells.get(3).getText();
       String email = cells.get(4).findElement(By.tagName("a")).getText();
       String mobile = cells.get(5).getText();
-      ContactData contact = new ContactData(id, firstname, lastname, address, email, mobile, null);
+      ContactData contact = new ContactData()
+              .withId(id)
+              .withFirstname(firstname)
+              .withLastname(lastname)
+              .withAddress(address)
+              .withEmail(email)
+              .withMobile(mobile);
       contacts.add(contact);
     }
     return contacts;

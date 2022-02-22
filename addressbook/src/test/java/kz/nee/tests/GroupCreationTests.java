@@ -20,7 +20,11 @@ public class GroupCreationTests extends TestBase {
 
     List<GroupData> before = app.group().list();
 
-    GroupData group = new GroupData("Group name", "Group header", "Group footer");
+    GroupData group = new GroupData()
+            .withName("Group name")
+            .withHeader("Group header")
+            .withFooter("Group footer");
+
     app.group().create(group);
 
     List<GroupData> after = app.group().list();
