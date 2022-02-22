@@ -13,26 +13,26 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.getNavigationHelper().gotoContactCreation();
+    app.goTo().contactCreation();
     GroupData groupData = new GroupData("Group name", "Group header", "Group footer");
-    if (!app.getContactHelper().findGroupInContact(groupData.getName())) {
-      app.getGroupHelper().createGroup(groupData);
+    if (!app.contact().findGroup(groupData.getName())) {
+      app.group().create(groupData);
     }
   }
 
   @Test
   public void testContactCreation() throws Exception {
 
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().home();
 
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
 
     ContactData contact = new ContactData("Yevgeniy", "Nozikov", "Almaty", "nee@nee.kz", "+77075555555", "Group name");
     int index = before.size() + 1;
 
-    app.getContactHelper().createContact(contact);
+    app.contact().create(contact);
 
-    List<ContactData> after = app.getContactHelper().getContactList();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), index, "Количество контактов не увеличилось!");
 
     before.add(contact);

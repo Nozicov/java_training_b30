@@ -18,7 +18,7 @@ public class GroupHelper extends BaseHelper {
     click(By.linkText("group page"));
   }
 
-  public void gotoGroupPage() {
+  public void gotoPage() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Groups")
             && isElementPresent(By.name("new"))){
@@ -45,7 +45,7 @@ public class GroupHelper extends BaseHelper {
     click(By.name("delete"));
   }
 
-  public void selectedGroup(int index) {
+  public void select(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
     //click(By.name("selected[]"));
   }
@@ -58,37 +58,37 @@ public class GroupHelper extends BaseHelper {
     click(By.name("update"));
   }
 
-  public void createGroup(GroupData group) {
-    gotoGroupPage();
+  public void create(GroupData group) {
+    gotoPage();
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
     returnToGroupPage();
   }
 
-  public void modifyGroup(int index, GroupData group) {
-    selectedGroup(index);
+  public void modify(int index, GroupData group) {
+    select(index);
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnToGroupPage();
   }
 
-  public void deleteGroup(int index) {
-    selectedGroup(index);
+  public void delete(int index) {
+    select(index);
     deleteSelectedGrops();
-    gotoGroupPage();
+    gotoPage();
   }
 
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public int getGroupCount() {
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.xpath("//span[@class=\"group\"]"));
     for (WebElement element: elements){

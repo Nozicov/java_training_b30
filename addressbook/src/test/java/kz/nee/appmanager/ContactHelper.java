@@ -65,21 +65,21 @@ public class ContactHelper extends BaseHelper {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
     gotoContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
     returnToHomePage();
   }
 
-  public void modifyContact(int index, ContactData contact) {
+  public void modify(int index, ContactData contact) {
     selectedContactModification(index);
     fillContactForm(contact, false);
     submitContactModification();
     returnToHomePage();
   }
 
-  public void deleteGroup(int index) {
+  public void delete(int index) {
     selectContact(index);
     deleteSelectedContacts();
     returnHomePage();
@@ -89,7 +89,7 @@ public class ContactHelper extends BaseHelper {
     return isElementPresent(By.xpath("//img[@title='Details']"));
   }
 
-  public boolean findGroupInContact(String name) {
+  public boolean findGroup(String name) {
     return selectList(By.name("new_group"), name);
   }
 
@@ -108,7 +108,7 @@ public class ContactHelper extends BaseHelper {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element: elements){

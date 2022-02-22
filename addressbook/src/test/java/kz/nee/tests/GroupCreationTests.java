@@ -12,18 +12,18 @@ public class GroupCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.getGroupHelper().gotoGroupPage();
+    app.group().gotoPage();
   }
 
   @Test
   public void testGroupCreation() throws Exception {
 
-    List<GroupData> before = app.getGroupHelper().getGroupList();
+    List<GroupData> before = app.group().list();
 
     GroupData group = new GroupData("Group name", "Group header", "Group footer");
-    app.getGroupHelper().createGroup(group);
+    app.group().create(group);
 
-    List<GroupData> after = app.getGroupHelper().getGroupList();
+    List<GroupData> after = app.group().list();
     Assert.assertEquals(after.size(), before.size() + 1, "Количество групп не увеличилось!");
 
     before.add(group);

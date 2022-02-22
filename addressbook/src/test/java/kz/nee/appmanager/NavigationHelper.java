@@ -9,11 +9,11 @@ public class NavigationHelper extends BaseHelper {
     super(wd);
   }
 
-  public void gotoContactCreation() {
+  public void contactCreation() {
     click(By.linkText("add new"));
   }
 
-  public void gotoHomePage() {
+  public void home() {
     if (isElementPresent(By.id("maintable"))){
       return;
     }
