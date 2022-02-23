@@ -5,8 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupDeletionTest extends TestBase {
 
@@ -25,19 +24,16 @@ public class GroupDeletionTest extends TestBase {
   @Test
   public void testGroupDeletion() {
 
-    List<GroupData> before = app.group().list();
-    int index = before.size() - 1;
+    Set<GroupData> before = app.group().all();
+    GroupData deletedGroup = before.iterator().next();
 
-    app.group().delete(index);
+    app.group().delete(deletedGroup);
 
-    List<GroupData> after = app.group().list();
+    Set<GroupData> after = app.group().all();
     Assert.assertEquals(after.size(), before.size() - 1, "Количество групп не уменьшилось!");
 
-    before.remove(index);
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after, "Сравнение отсортированных списков групп прошло не успешно!");
+    before.remove(deletedGroup);
+    Assert.assertEquals(before, after, "Сравнение множеств групп прошло не успешно!");
   }
 
 

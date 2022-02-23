@@ -5,8 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactDeletionTests extends TestBase{
 
@@ -28,19 +27,16 @@ public class ContactDeletionTests extends TestBase{
   @Test
   public void testContactDeletion(){
 
-    List<ContactData> before = app.contact().list();
-    int index = before.size() - 1;
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
 
-    app.contact().delete(index);
+    app.contact().delete(deletedContact);
 
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1, "Количество контактов не уменьшилось!");
 
-    before.remove(index);
-    Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after, "Сравнение отсортированных списков контактов прошло не успешно!");
+    before.remove(deletedContact);
+    Assert.assertEquals(before, after, "Сравнение множества контактов прошло не успешно!");
   }
 
 }

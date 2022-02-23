@@ -6,20 +6,19 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
     app.goTo().contactCreation();
-    GroupData groupData = new GroupData()
+    GroupData group = new GroupData()
             .withName("Group name")
             .withHeader("Group header")
             .withFooter("Group footer");
-    if (!app.contact().findGroup(groupData.getName())) {
-      app.group().create(groupData);
+    if (!app.contact().findGroup(group.getName())) {
+      app.group().create(group);
     }
   }
 
@@ -28,7 +27,7 @@ public class ContactCreationTests extends TestBase {
 
     app.goTo().home();
 
-    List<ContactData> before = app.contact().list();
+    Set<ContactData> before = app.contact().all();
 
     ContactData contact = new ContactData()
             .withFirstname("Yevgeniy")
@@ -40,14 +39,12 @@ public class ContactCreationTests extends TestBase {
 
     app.contact().create(contact);
 
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() + 1, "Количество контактов не увеличилось!");
 
+    contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
     before.add(contact);
-    Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(before, after, "Сравнение отсортированных списков контактов прошло не успешно!");
+    Assert.assertEquals(before, after, "Сравнение множества контактов прошло не успешно!");
   }
 
 }
