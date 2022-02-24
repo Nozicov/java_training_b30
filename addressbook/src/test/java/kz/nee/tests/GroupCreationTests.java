@@ -1,11 +1,12 @@
 package kz.nee.tests;
 
 import kz.nee.model.GroupData;
-import org.testng.Assert;
+import kz.nee.model.Groups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
@@ -17,7 +18,7 @@ public class GroupCreationTests extends TestBase {
   @Test
   public void testGroupCreation() throws Exception {
 
-    Set<GroupData> before = app.group().all();
+   Groups before = app.group().all();
 
     GroupData group = new GroupData()
             .withName("Group name")
@@ -26,12 +27,11 @@ public class GroupCreationTests extends TestBase {
 
     app.group().create(group);
 
-    Set<GroupData> after = app.group().all();
-    Assert.assertEquals(after.size(), before.size() + 1, "Количество групп не увеличилось!");
-
-    group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-    before.add(group);
-    Assert.assertEquals(before, after, "Сравнение множеств групп прошло не успешно!");
+    Groups after = app.group().all();
+    assertThat(after.size(), equalTo(before.size() + 1));
+    assertThat(after, equalTo(
+            before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt())))
+    );
   }
 
 }

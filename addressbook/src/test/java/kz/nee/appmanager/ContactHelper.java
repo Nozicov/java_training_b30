@@ -1,6 +1,7 @@
 package kz.nee.appmanager;
 
 import kz.nee.model.ContactData;
+import kz.nee.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -8,9 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
 
@@ -131,8 +130,8 @@ public class ContactHelper extends BaseHelper {
     return contacts;
   }
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element: elements){
       List<WebElement> cells = element.findElements(By.tagName("td"));

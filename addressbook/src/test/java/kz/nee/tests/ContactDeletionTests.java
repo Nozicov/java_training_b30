@@ -1,11 +1,13 @@
 package kz.nee.tests;
 
 import kz.nee.model.ContactData;
-import org.testng.Assert;
+import kz.nee.model.Contacts;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase{
 
@@ -27,16 +29,14 @@ public class ContactDeletionTests extends TestBase{
   @Test
   public void testContactDeletion(){
 
-    Set<ContactData> before = app.contact().all();
+    Contacts before = app.contact().all();
     ContactData deletedContact = before.iterator().next();
 
     app.contact().delete(deletedContact);
 
-    Set<ContactData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size() - 1, "Количество контактов не уменьшилось!");
-
-    before.remove(deletedContact);
-    Assert.assertEquals(before, after, "Сравнение множества контактов прошло не успешно!");
+    Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size() - 1, "Количество контактов не уменьшилось!");
+    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.withOut(deletedContact)));
   }
 
 }

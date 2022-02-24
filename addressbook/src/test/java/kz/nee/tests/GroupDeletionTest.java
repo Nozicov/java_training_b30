@@ -1,11 +1,13 @@
 package kz.nee.tests;
 
 import kz.nee.model.GroupData;
-import org.testng.Assert;
+import kz.nee.model.Groups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTest extends TestBase {
 
@@ -24,17 +26,14 @@ public class GroupDeletionTest extends TestBase {
   @Test
   public void testGroupDeletion() {
 
-    Set<GroupData> before = app.group().all();
+    Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
 
     app.group().delete(deletedGroup);
 
-    Set<GroupData> after = app.group().all();
-    Assert.assertEquals(after.size(), before.size() - 1, "Количество групп не уменьшилось!");
-
-    before.remove(deletedGroup);
-    Assert.assertEquals(before, after, "Сравнение множеств групп прошло не успешно!");
+    Groups after = app.group().all();
+    assertEquals(after.size(), before.size() - 1, "Количество групп не уменьшилось!");
+    assertThat(after, equalTo(before.withOut(deletedGroup)));
   }
-
 
 }

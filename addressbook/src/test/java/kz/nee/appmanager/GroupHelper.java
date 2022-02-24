@@ -1,14 +1,13 @@
 package kz.nee.appmanager;
 
 import kz.nee.model.GroupData;
+import kz.nee.model.Groups;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends BaseHelper {
 
@@ -109,8 +108,8 @@ public class GroupHelper extends BaseHelper {
     return groups;
   }
 
-  public Set<GroupData> all() {
-    Set<GroupData> groups = new HashSet<GroupData>();
+  public Groups all() {
+    Groups groups = new Groups();
     List<WebElement> elements = wd.findElements(By.xpath("//span[@class=\"group\"]"));
     for (WebElement element: elements){
       String name = element.getText();
