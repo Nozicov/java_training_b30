@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends BaseHelper {
@@ -68,6 +67,7 @@ public class ContactHelper extends BaseHelper {
     gotoContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
+    contactCache = null;
     returnToHomePage();
   }
 
@@ -75,17 +75,15 @@ public class ContactHelper extends BaseHelper {
     selectedContactModification(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
+    contactCache = null;
     returnToHomePage();
   }
 
   public void delete(ContactData contact) {
     selectContact(contact.getId());
     deleteSelectedContacts();
+    contactCache = null;
     returnHomePage();
-  }
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.xpath("//img[@title='Details']"));
   }
 
   public boolean findGroup(String name) {
@@ -103,35 +101,13 @@ public class ContactHelper extends BaseHelper {
     click(By.linkText("home"));
   }
 
-  public int getContactCount() {
-    return wd.findElements(By.name("selected[]")).size();
-  }
-
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
-    for (WebElement element: elements){
-      List<WebElement> cells = element.findElements(By.tagName("td"));
-      int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("id"));
-      String lastname  = cells.get(1).getText();
-      String firstname = cells.get(2).getText();
-      String address = cells.get(3).getText();
-      String email = cells.get(4).findElement(By.tagName("a")).getText();
-      String mobile = cells.get(5).getText();
-      ContactData contact = new ContactData()
-              .withId(id)
-              .withFirstname(firstname)
-              .withLastname(lastname)
-              .withAddress(address)
-              .withEmail(email)
-              .withMobile(mobile);
-      contacts.add(contact);
-    }
-    return contacts;
-  }
+  private Contacts contactCache = null;
 
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCache != null){
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element: elements){
       List<WebElement> cells = element.findElements(By.tagName("td"));
@@ -151,8 +127,8 @@ public class ContactHelper extends BaseHelper {
               .withAddress(address)
               .withEmail(email)
               .withMobile(mobile);
-      contacts.add(contact);
+      contactCache.add(contact);
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 }
