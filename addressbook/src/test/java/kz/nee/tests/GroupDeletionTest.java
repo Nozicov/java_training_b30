@@ -7,14 +7,13 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class GroupDeletionTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
     app.group().gotoPage();
-    if (app.group().all().size() == 0){
+    if (app.group().count() == 0){
       app.group().create(new GroupData()
               .withName("Group name")
               .withHeader("Group header")
@@ -31,8 +30,8 @@ public class GroupDeletionTest extends TestBase {
 
     app.group().delete(deletedGroup);
 
+    assertThat(app.group().count(), equalTo(before.size() - 1));
     Groups after = app.group().all();
-    assertEquals(after.size(), before.size() - 1, "Количество групп не уменьшилось!");
     assertThat(after, equalTo(before.withOut(deletedGroup)));
   }
 

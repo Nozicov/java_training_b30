@@ -7,8 +7,8 @@ import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
 
@@ -41,8 +41,8 @@ public class ContactCreationTests extends TestBase {
 
     app.contact().create(contact);
 
+    assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-    assertEquals(after.size(), before.size() + 1, "Количество контактов не увеличилось!");
     assertThat(after, CoreMatchers.equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }

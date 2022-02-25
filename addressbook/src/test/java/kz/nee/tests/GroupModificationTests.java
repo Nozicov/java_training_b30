@@ -6,15 +6,15 @@ import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
     app.group().gotoPage();
-    if (app.group().all().size() == 0){
+    if (app.group().count() == 0){
       app.group().create(new GroupData()
               .withName("Group name")
               .withHeader("Group header")
@@ -36,8 +36,8 @@ public class GroupModificationTests extends TestBase {
 
     app.group().modify(group);
 
+    assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();
-    assertEquals(after.size(), before.size(), "Изменилось количество групп!");
     assertThat(after, CoreMatchers.equalTo(before.withOut(modifiedGroup).withAdded(group)));
   }
 

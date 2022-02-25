@@ -2,18 +2,17 @@ package kz.nee.tests;
 
 import kz.nee.model.ContactData;
 import kz.nee.model.Contacts;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactDeletionTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions(){
-    if (app.contact().all().size() == 0){
+    if (app.contact().count() == 0){
       app.goTo().contactCreation();
       app.contact().create(new ContactData()
               .withFirstname("Yevgeniy")
@@ -34,9 +33,9 @@ public class ContactDeletionTests extends TestBase{
 
     app.contact().delete(deletedContact);
 
+    assertThat(app.contact().count(), equalTo(before.size() - 1));
     Contacts after = app.contact().all();
-    assertEquals(after.size(), before.size() - 1, "Количество контактов не уменьшилось!");
-    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.withOut(deletedContact)));
+    assertThat(after, equalTo(before.withOut(deletedContact)));
   }
 
 }

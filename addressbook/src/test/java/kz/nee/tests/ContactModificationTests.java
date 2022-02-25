@@ -2,17 +2,17 @@ package kz.nee.tests;
 
 import kz.nee.model.ContactData;
 import kz.nee.model.Contacts;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions(){
-    if (app.contact().all().size() == 0){
+    if (app.contact().count() == 0){
       app.goTo().contactCreation();
       app.contact().create(new ContactData()
               .withFirstname("Yevgeniy")
@@ -42,9 +42,9 @@ public class ContactModificationTests extends TestBase{
 
     app.contact().modify(contact);
 
+    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size(), "Изменилось количество контактов!");
-    MatcherAssert.assertThat(after, CoreMatchers.equalTo(before.withOut(modifiedContact).withAdded(contact)));
+    assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
   }
 
 }
