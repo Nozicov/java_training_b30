@@ -12,6 +12,7 @@ public class ContactData {
   private String phoneHome;
   private String phoneMobile;
   private String phoneWork;
+  private String allPhones;
 
   public int getId() {
     return id;
@@ -51,6 +52,10 @@ public class ContactData {
 
   public String getPhoneWork() {
     return phoneWork;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
   public String getGroup() {
@@ -112,6 +117,11 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -126,6 +136,7 @@ public class ContactData {
             ", phoneHome='" + phoneHome + '\'' +
             ", phoneMobile='" + phoneMobile + '\'' +
             ", phoneWork='" + phoneWork + '\'' +
+            ", allPhones='" + allPhones + '\'' +
             '}';
   }
 

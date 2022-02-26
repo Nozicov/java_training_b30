@@ -121,7 +121,7 @@ public class ContactHelper extends BaseHelper {
       if (cells.get(4).findElements(By.tagName("a")).size() > 0){
         email = cells.get(4).findElement(By.tagName("a")).getText();
       }
-      String[] phones = cells.get(5).getText().split("\n");
+      String allPhones = cells.get(5).getText();
 
       ContactData contact = new ContactData()
               .withId(id)
@@ -129,9 +129,7 @@ public class ContactHelper extends BaseHelper {
               .withLastname(lastname)
               .withAddress(address)
               .withEmail(email)
-              .withPhoneHome(phones[0])
-              .withPhoneMobile(phones[1])
-              .withPhoneWork(phones[2]);
+              .withAllPhones(allPhones);
 
       contactCache.add(contact);
     }
