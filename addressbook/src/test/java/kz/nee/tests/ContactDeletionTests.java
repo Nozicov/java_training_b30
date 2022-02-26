@@ -19,7 +19,7 @@ public class ContactDeletionTests extends TestBase{
               .withLastname("Nozikov")
               .withAddress("Almaty")
               .withEmail("nee@nee.kz")
-              .withMobile("+77075555555")
+              .withPhoneMobile("+77075555555")
               .withGroup("Group name")
       );
     }

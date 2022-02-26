@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase{
               .withLastname("Nozikov")
               .withAddress("Almaty")
               .withEmail("nee@nee.kz")
-              .withMobile("+77075555555")
+              .withPhoneMobile("+77075555555")
               .withGroup("Group name")
       );
       app.contact().returnToHomePage();
@@ -38,7 +38,7 @@ public class ContactModificationTests extends TestBase{
             .withLastname("Nozikov - up")
             .withAddress("Almaty - up")
             .withEmail("nee@nee-up.kz")
-            .withMobile("+77777777777");
+            .withPhoneMobile("+77777777777");
 
     app.contact().modify(contact);
 
