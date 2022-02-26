@@ -97,17 +97,17 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withPhoneHome(String group) {
+  public ContactData withPhoneHome(String phoneHome) {
     this.phoneHome = phoneHome;
     return this;
   }
 
-  public ContactData withPhoneWork(String group) {
+  public ContactData withPhoneWork(String phoneWork) {
     this.phoneWork = phoneWork;
     return this;
   }
 
-  public ContactData withPhoneMobile(String group) {
+  public ContactData withPhoneMobile(String phoneMobile) {
     this.phoneMobile = phoneMobile;
     return this;
   }
@@ -119,6 +119,13 @@ public class ContactData {
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", address='" + address + '\'' +
+            ", email='" + email + '\'' +
+            ", email2='" + email2 + '\'' +
+            ", email3='" + email3 + '\'' +
+            ", group='" + group + '\'' +
+            ", phoneHome='" + phoneHome + '\'' +
+            ", phoneMobile='" + phoneMobile + '\'' +
+            ", phoneWork='" + phoneWork + '\'' +
             '}';
   }
 
