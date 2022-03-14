@@ -6,6 +6,8 @@ import kz.nee.model.GroupData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -30,6 +32,7 @@ public class ContactCreationTests extends TestBase {
 
     Contacts before = app.contact().all();
 
+    File photo = new File("src/test/resources/img.jpg");
     ContactData contact = new ContactData()
             .withFirstname("Yevgeniy")
             .withLastname("Nozikov")
@@ -38,14 +41,13 @@ public class ContactCreationTests extends TestBase {
             .withPhoneMobile("+77075555555")
             .withPhoneHome("+77075555777")
             .withPhoneWork("+77075555888")
-            .withGroup("Group name");
+            .withGroup("Group name")
+            .withPhoto(photo);
 
     app.contact().create(contact);
 
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-//    assertThat(after, CoreMatchers.equalTo(
-//            before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
   }
 
 }

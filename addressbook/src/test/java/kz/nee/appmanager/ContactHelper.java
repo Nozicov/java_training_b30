@@ -32,6 +32,7 @@ public class ContactHelper extends BaseHelper {
     type(By.name("home"), contact.getPhoneHome());
     type(By.name("mobile"), contact.getPhoneMobile());
     type(By.name("work"), contact.getPhoneWork());
+    attach(By.name("photo"), contact.getPhoto());
 
     if (creation) {
       try {
