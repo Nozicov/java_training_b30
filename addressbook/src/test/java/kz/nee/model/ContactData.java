@@ -23,12 +23,15 @@ public class ContactData {
   private String email3;
   @Expose
   private String group;
+  @Expose
   private String phoneHome;
   @Expose
   private String phoneMobile;
+  @Expose
   private String phoneWork;
   private String allPhones;
   private String allEmails;
+  @Expose
   private File photo;
 
   public int getId() {

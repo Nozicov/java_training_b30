@@ -5,7 +5,9 @@
     <address>Address 0</address>
     <email>email0@mail.ru</email>
     <group>Group 0</group>
+    <phoneHome>+777700000</phoneHome>
     <phoneMobile>+770700000</phoneMobile>
+    <phoneWork>+775700000</phoneWork>
   </contact>
   <contact>
     <firstname>Firstname 1</firstname>
@@ -13,7 +15,9 @@
     <address>Address 1</address>
     <email>email1@mail.ru</email>
     <group>Group 1</group>
+    <phoneHome>+777700001</phoneHome>
     <phoneMobile>+770700001</phoneMobile>
+    <phoneWork>+775700001</phoneWork>
   </contact>
   <contact>
     <firstname>Firstname 2</firstname>
@@ -21,6 +25,8 @@
     <address>Address 2</address>
     <email>email2@mail.ru</email>
     <group>Group 2</group>
+    <phoneHome>+777700002</phoneHome>
     <phoneMobile>+770700002</phoneMobile>
+    <phoneWork>+775700002</phoneWork>
   </contact>
 </list>

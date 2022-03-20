@@ -5,7 +5,9 @@
     "address": "Address 0",
     "email": "email0@mail.ru",
     "group": "Group 0",
-    "phoneMobile": "+770700000"
+    "phoneHome": "+777700000",
+    "phoneMobile": "+770700000",
+    "phoneWork": "+775700000"
   },
   {
     "firstname": "Firstname 1",
@@ -13,7 +15,9 @@
     "address": "Address 1",
     "email": "email1@mail.ru",
     "group": "Group 1",
-    "phoneMobile": "+770700001"
+    "phoneHome": "+777700001",
+    "phoneMobile": "+770700001",
+    "phoneWork": "+775700001"
   },
   {
     "firstname": "Firstname 2",
@@ -21,6 +25,8 @@
     "address": "Address 2",
     "email": "email2@mail.ru",
     "group": "Group 2",
-    "phoneMobile": "+770700002"
+    "phoneHome": "+777700002",
+    "phoneMobile": "+770700002",
+    "phoneWork": "+775700002"
   }
 ]
