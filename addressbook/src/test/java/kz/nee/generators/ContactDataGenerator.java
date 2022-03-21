@@ -63,8 +63,7 @@ public class ContactDataGenerator {
               .withEmail3(String.format("email3_%s@mail.ru", i))
               .withPhoneMobile(String.format("+77070000%s", i))
               .withPhoneHome(String.format("+77770000%s", i))
-              .withPhoneWork(String.format("+77570000%s", i))
-              .withGroup(String.format("Group %s", i)));
+              .withPhoneWork(String.format("+77570000%s", i)));
     }
     return contacts;
   }
@@ -100,8 +99,7 @@ public class ContactDataGenerator {
                 contact.getEmail3(),
                 contact.getPhoneMobile(),
                 contact.getPhoneHome(),
-                contact.getPhoneWork(),
-                contact.getGroup()));
+                contact.getPhoneWork()));
       }
     }
   }

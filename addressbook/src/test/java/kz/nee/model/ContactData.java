@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contact")
 @Entity
@@ -47,10 +49,6 @@ public class ContactData {
   private String email3;
 
   @Expose
-  @Transient
-  private String group;
-
-  @Expose
   @Column(name = "home")
   @Type(type = "text")
   private String phoneHome;
@@ -75,6 +73,13 @@ public class ContactData {
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
 
   public int getId() {
     return id;
@@ -124,10 +129,6 @@ public class ContactData {
     return allEmails;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   public File getPhoto() {
     return new File(photo);
   }
@@ -167,11 +168,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
   public ContactData withPhoneHome(String phoneHome) {
     this.phoneHome = phoneHome;
     return this;
@@ -202,6 +198,10 @@ public class ContactData {
     return this;
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -212,7 +212,6 @@ public class ContactData {
             ", email='" + email + '\'' +
             ", email2='" + email2 + '\'' +
             ", email3='" + email3 + '\'' +
-            ", group='" + group + '\'' +
             ", phoneHome='" + phoneHome + '\'' +
             ", phoneMobile='" + phoneMobile + '\'' +
             ", phoneWork='" + phoneWork + '\'' +
@@ -234,7 +233,6 @@ public class ContactData {
     if (email != null ? !email.equals(that.email) : that.email != null) return false;
     if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
     if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
-    if (group != null ? !group.equals(that.group) : that.group != null) return false;
     if (phoneHome != null ? !phoneHome.equals(that.phoneHome) : that.phoneHome != null) return false;
     if (phoneMobile != null ? !phoneMobile.equals(that.phoneMobile) : that.phoneMobile != null) return false;
     return phoneWork != null ? phoneWork.equals(that.phoneWork) : that.phoneWork == null;
@@ -249,7 +247,6 @@ public class ContactData {
     result = 31 * result + (email != null ? email.hashCode() : 0);
     result = 31 * result + (email2 != null ? email2.hashCode() : 0);
     result = 31 * result + (email3 != null ? email3.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
     result = 31 * result + (phoneHome != null ? phoneHome.hashCode() : 0);
     result = 31 * result + (phoneMobile != null ? phoneMobile.hashCode() : 0);
     result = 31 * result + (phoneWork != null ? phoneWork.hashCode() : 0);

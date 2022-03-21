@@ -22,7 +22,6 @@ public class ContactDeletionTests extends TestBase{
               .withPhoneMobile("+77075555555")
               .withPhoneWork("+77075555588")
               .withPhoneHome("+77075555577")
-              .withGroup("Group name")
       );
     }
   }

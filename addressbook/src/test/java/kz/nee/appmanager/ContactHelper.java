@@ -3,10 +3,8 @@ package kz.nee.appmanager;
 import kz.nee.model.ContactData;
 import kz.nee.model.Contacts;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -36,19 +34,19 @@ public class ContactHelper extends BaseHelper {
     type(By.name("work"), contact.getPhoneWork());
     //attach(By.name("photo"), contact.getPhoto());
 
-    if (creation) {
-      try {
-        selectList(By.name("new_group"), contact.getGroup());
-      } catch (NoSuchElementException ex) {
-        try {
-          selectList(By.name("new_group"), "[none]");
-        } catch (NoSuchElementException e) {
-          Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
-      }
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-    }
+//    if (creation) {
+//      try {
+//        selectList(By.name("new_group"), contact.getGroup());
+//      } catch (NoSuchElementException ex) {
+//        try {
+//          selectList(By.name("new_group"), "[none]");
+//        } catch (NoSuchElementException e) {
+//          Assert.assertFalse(isElementPresent(By.name("new_group")));
+//        }
+//      }
+//    } else {
+//      Assert.assertFalse(isElementPresent(By.name("new_group")));
+//    }
   }
 
   public void selectContact(int id) {

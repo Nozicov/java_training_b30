@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.XStream;
 import kz.nee.model.ContactData;
 import kz.nee.model.Contacts;
 import kz.nee.model.GroupData;
+import kz.nee.model.Groups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -69,6 +70,9 @@ public class ContactCreationTests extends TestBase {
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
 
+    Groups groups = app.db().groups();
+
+
     app.goTo().home();
 
     Contacts before = app.db().contacts();
@@ -83,7 +87,7 @@ public class ContactCreationTests extends TestBase {
     System.out.println(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt())));
 
     assertThat(after, equalTo(
-            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()).withGroup(null)))
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt())))
     );
 
     verifyGroupListInUI();
