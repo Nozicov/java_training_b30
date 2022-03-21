@@ -36,10 +36,12 @@ public class ContactData {
   @Type(type = "text")
   private String email;
 
+  @Expose
   @Column(name = "email2")
   @Type(type = "text")
   private String email2;
 
+  @Expose
   @Column(name = "email3")
   @Type(type = "text")
   private String email3;
@@ -69,7 +71,7 @@ public class ContactData {
   @Transient
   private String allEmails;
 
-  @Expose
+  @Transient
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
@@ -227,7 +229,15 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+    if (address != null ? !address.equals(that.address) : that.address != null) return false;
+    if (email != null ? !email.equals(that.email) : that.email != null) return false;
+    if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+    if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+    if (group != null ? !group.equals(that.group) : that.group != null) return false;
+    if (phoneHome != null ? !phoneHome.equals(that.phoneHome) : that.phoneHome != null) return false;
+    if (phoneMobile != null ? !phoneMobile.equals(that.phoneMobile) : that.phoneMobile != null) return false;
+    return phoneWork != null ? phoneWork.equals(that.phoneWork) : that.phoneWork == null;
   }
 
   @Override
@@ -235,6 +245,14 @@ public class ContactData {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    result = 31 * result + (address != null ? address.hashCode() : 0);
+    result = 31 * result + (email != null ? email.hashCode() : 0);
+    result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+    result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+    result = 31 * result + (group != null ? group.hashCode() : 0);
+    result = 31 * result + (phoneHome != null ? phoneHome.hashCode() : 0);
+    result = 31 * result + (phoneMobile != null ? phoneMobile.hashCode() : 0);
+    result = 31 * result + (phoneWork != null ? phoneWork.hashCode() : 0);
     return result;
   }
 }

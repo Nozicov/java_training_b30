@@ -3,7 +3,9 @@
     <firstname>Firstname 0</firstname>
     <lastname>Lastname 0</lastname>
     <address>Address 0</address>
-    <email>email0@mail.ru</email>
+    <email>email_0@mail.ru</email>
+    <email2>email2_0@mail.ru</email2>
+    <email3>email3_0@mail.ru</email3>
     <group>Group 0</group>
     <phoneHome>+777700000</phoneHome>
     <phoneMobile>+770700000</phoneMobile>
@@ -13,7 +15,9 @@
     <firstname>Firstname 1</firstname>
     <lastname>Lastname 1</lastname>
     <address>Address 1</address>
-    <email>email1@mail.ru</email>
+    <email>email_1@mail.ru</email>
+    <email2>email2_1@mail.ru</email2>
+    <email3>email3_1@mail.ru</email3>
     <group>Group 1</group>
     <phoneHome>+777700001</phoneHome>
     <phoneMobile>+770700001</phoneMobile>
@@ -23,7 +27,9 @@
     <firstname>Firstname 2</firstname>
     <lastname>Lastname 2</lastname>
     <address>Address 2</address>
-    <email>email2@mail.ru</email>
+    <email>email_2@mail.ru</email>
+    <email2>email2_2@mail.ru</email2>
+    <email3>email3_2@mail.ru</email3>
     <group>Group 2</group>
     <phoneHome>+777700002</phoneHome>
     <phoneMobile>+770700002</phoneMobile>

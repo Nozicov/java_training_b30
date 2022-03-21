@@ -29,10 +29,12 @@ public class ContactHelper extends BaseHelper {
     type(By.name("lastname"), contact.getLastname());
     type(By.name("address"), contact.getAddress());
     type(By.name("email"), contact.getEmail());
+    type(By.name("email2"), contact.getEmail2());
+    type(By.name("email3"), contact.getEmail3());
     type(By.name("home"), contact.getPhoneHome());
     type(By.name("mobile"), contact.getPhoneMobile());
     type(By.name("work"), contact.getPhoneWork());
-    attach(By.name("photo"), contact.getPhoto());
+    //attach(By.name("photo"), contact.getPhoto());
 
     if (creation) {
       try {

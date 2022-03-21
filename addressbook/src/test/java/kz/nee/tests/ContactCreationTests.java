@@ -25,12 +25,11 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.goTo().contactCreation();
-    GroupData group = new GroupData()
-            .withName("Group name")
-            .withHeader("Group header")
-            .withFooter("Group footer");
-    if (!app.contact().findGroup(group.getName())) {
+    if (app.db().groups().size() == 0) {
+      GroupData group = new GroupData()
+              .withName("Group name")
+              .withHeader("Group header")
+              .withFooter("Group footer");
       app.group().create(group);
     }
   }
@@ -72,12 +71,21 @@ public class ContactCreationTests extends TestBase {
 
     app.goTo().home();
 
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
+    System.out.println(before);
 
     app.contact().create(contact);
 
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+
+    Contacts after = app.db().contacts();
+
+    System.out.println(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt())));
+
+    assertThat(after, equalTo(
+            before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()).withGroup(null)))
+    );
+
   }
 
 }
