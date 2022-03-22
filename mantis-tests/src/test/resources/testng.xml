@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Mantis">
+        <packages>
+            <package name="kz.nee.appmanager" />
+            <package name="kz.nee.model" />
+        </packages>
+
+        <classes>
+            <class name="kz.nee.mantis.tests.LoginTests"/>
+            <class name="kz.nee.mantis.tests.RegistrationTests"/>
+        </classes>
+    </test>
+</suite>
