@@ -5,11 +5,13 @@
         <packages>
             <package name="kz.nee.appmanager" />
             <package name="kz.nee.model" />
+            <package name="kz.nee.tests" />
         </packages>
 
         <classes>
             <class name="kz.nee.mantis.tests.LoginTests"/>
             <class name="kz.nee.mantis.tests.RegistrationTests"/>
+            <class name="kz.nee.mantis.tests.TestBase"/>
         </classes>
     </test>
 </suite>
