@@ -6,7 +6,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -18,6 +17,7 @@ public class ApplicationManager {
 
   String browser;
   private RegistrationHelper registrationHelper;
+  private ResetHelp resetHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
@@ -29,10 +29,9 @@ public class ApplicationManager {
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+    properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
 
   }
-
    public void stop() {
     if (wd != null){
       wd.quit();
@@ -52,6 +51,13 @@ public class ApplicationManager {
       registrationHelper = new RegistrationHelper(this);
     }
     return registrationHelper;
+  }
+
+  public ResetHelp reset() {
+    if (resetHelper == null){
+      resetHelper = new ResetHelp(this);
+    }
+    return resetHelper;
   }
 
   public WebDriver getDriver() {

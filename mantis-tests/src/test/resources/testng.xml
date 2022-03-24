@@ -9,8 +9,9 @@
         </packages>
 
         <classes>
-            <class name="kz.nee.mantis.tests.LoginTests"/>
             <class name="kz.nee.mantis.tests.RegistrationTests"/>
+            <class name="kz.nee.mantis.tests.LoginTests"/>
+            <class name="kz.nee.mantis.tests.ResetPasswordTests"/>
             <class name="kz.nee.mantis.tests.TestBase"/>
         </classes>
     </test>
